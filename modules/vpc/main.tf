@@ -5,7 +5,7 @@ resource "aws_vpc" "vpc" {
 
   tags {
     Name        = "${var.project}-${var.environment}-vpc"
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"
@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "igw" {
 
   tags {
     Name        = "${var.project}-${var.environment}-igw"
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"
@@ -37,7 +37,7 @@ resource "aws_subnet" "public" {
 
   tags {
     Name        = "${var.project}-${var.environment}-public-${count.index}"
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"
@@ -56,7 +56,7 @@ resource "aws_route_table" "public" {
 
   tags {
     Name        = "${var.project}-${var.environment}-public"
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"
@@ -80,7 +80,7 @@ resource "aws_subnet" "private" {
 
   tags {
     Name        = "${var.project}-${var.environment}-private-${count.index}"
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"
@@ -94,7 +94,7 @@ resource "aws_route_table" "private" {
 
   tags {
     Name        = "${var.project}-${var.environment}-private"
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"
@@ -116,7 +116,7 @@ resource "aws_subnet" "igw" {
 
   tags {
     Name        = "${var.project}-${var.environment}-igw"
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"
@@ -134,7 +134,7 @@ resource "aws_subnet" "nat" {
 
   tags {
     Name        = "${var.project}-${var.environment}-nat-${count.index}"
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"
@@ -162,7 +162,7 @@ resource "aws_route_table" "nat" {
 
   tags {
     Name        = "${var.project}-${var.environment}-nat"
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"
@@ -187,7 +187,7 @@ resource "aws_route_table" "igw" {
 
   tags {
     Name        = "${var.project}-${var.environment}-igw"
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"

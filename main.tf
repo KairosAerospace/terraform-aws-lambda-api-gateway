@@ -6,9 +6,9 @@ provider "aws" {
 # VPC
 ####################
 module "vpc_subnets" {
-  name                 = "${var.project}-${terraform.env}-vpc"
+  name                 = "${var.project}-${terraform.workspace}-vpc"
   source               = "./modules/vpc"
-  environment          = "${terraform.env}"
+  environment          = "${terraform.workspace}"
   enable_dns_support   = true
   enable_dns_hostnames = true
   vpc_cidr             = "${var.vpc_cidr}"
@@ -43,7 +43,7 @@ resource "aws_security_group" "all" {
   vpc_id = "${module.vpc_subnets.vpc_id}"
 
   tags {
-    Environment = "${terraform.env}"
+    Environment = "${terraform.workspace}"
     Project     = "${var.project}"
     Owner       = "${var.owner}"
     CostCenter  = "${var.costcenter}"
@@ -63,7 +63,7 @@ module "api" {
   lambda_arn = "${module.lambda.arn}"
   region     = "${var.region}"
   account_id = "${var.account_id}"
-  stage_name = "${terraform.env}"
+  stage_name = "${terraform.workspace}"
 }
 
 ####################
@@ -74,7 +74,7 @@ module "lambda" {
   s3_bucket     = "${aws_s3_bucket.lambda_repo.bucket}"
   s3_key        = "${var.lambda_zip_path}"
   hash          = "${data.aws_s3_bucket_object.lambda_dist_hash.etag}"
-  function_name = "${var.project}-${terraform.env}-${var.lambda_function_name}"
+  function_name = "${var.project}-${terraform.workspace}-${var.lambda_function_name}"
   handler       = "${var.lambda_handler}"
   runtime       = "${var.lambda_runtime}"
   role          = "${aws_iam_role.lambda_role.arn}"
@@ -88,7 +88,7 @@ module "lambda" {
 }
 
 resource "aws_s3_bucket" "lambda_repo" {
-  bucket = "lambda-repo-${var.project}-${terraform.env}"
+  bucket = "lambda-repo-${var.project}-${terraform.workspace}"
   region = "${var.region}"
 }
 
@@ -106,7 +106,7 @@ data "aws_s3_bucket_object" "lambda_dist_hash" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name = "${var.project}-${terraform.env}-${var.lambda_function_name}-role"
+  name = "${var.project}-${terraform.workspace}-${var.lambda_function_name}-role"
 
   assume_role_policy = <<EOF
 {

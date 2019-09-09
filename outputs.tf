@@ -1,5 +1,5 @@
 output "api_url" {
-  value = "${module.api.api_url}"
+  value = module.api.api_url
 }
 
 output "lambda_zip" {
@@ -7,5 +7,6 @@ output "lambda_zip" {
 }
 
 output "vpc_id" {
-  value = "${module.vpc_subnets.vpc_id}"
+  value = module.vpc_subnets.vpc_id
 }
+

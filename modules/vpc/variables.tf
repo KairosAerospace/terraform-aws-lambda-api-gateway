@@ -24,7 +24,7 @@ variable "vpc_cidr" {
 variable "public_subnets_cidr" {
   description = "CIDR for public subnets."
 
-  type = "list"
+  type = list(string)
 
   default = [
     "10.100.10.0/24",
@@ -35,7 +35,7 @@ variable "public_subnets_cidr" {
 variable "private_subnets_cidr" {
   description = "CIDR for private subnets"
 
-  type = "list"
+  type = list(string)
 
   default = [
     "10.100.30.0/24",
@@ -44,14 +44,15 @@ variable "private_subnets_cidr" {
 }
 
 variable "nat_cidr" {
-  type = "list"
+  type = list(string)
 }
 
-variable "igw_cidr" {}
+variable "igw_cidr" {
+}
 
 variable "azs" {
   description = "Avaialbility Zones for Subnets. Indexes must match `public_subnets_cidr`"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "map_public_ip_on_launch" {
@@ -59,7 +60,15 @@ variable "map_public_ip_on_launch" {
   default     = true
 }
 
-variable "service" {}
-variable "project" {}
-variable "owner" {}
-variable "costcenter" {}
+variable "service" {
+}
+
+variable "project" {
+}
+
+variable "owner" {
+}
+
+variable "costcenter" {
+}
+

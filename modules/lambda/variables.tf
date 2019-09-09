@@ -41,10 +41,11 @@ variable "app_config" {
 
 variable "subnet_ids" {
   description = "Which subnets to associate with lambda"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "security_group_ids" {
   description = "Which security groups to associate with lambda"
-  type        = "list"
+  type        = list(string)
 }
+

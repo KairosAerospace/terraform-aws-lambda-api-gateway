@@ -14,6 +14,7 @@ jobs:
       - run:
           name: validate terraform module
           command: |
+          terraform init
             for submodule in modules/*; do
                echo "Validating ${submodule}"
                (cd $submodule; terraform validate)

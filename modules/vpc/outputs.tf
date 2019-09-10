@@ -14,8 +14,8 @@ output "nat_subnet_cidr" {
   value = [aws_subnet.nat.*.cidr_block]
 }
 
-output "nat_subnet_id" {
-  value = [aws_subnet.nat.*.id]
+output "nat_subnet_ids" {
+  value = aws_subnet.nat.*.id
 }
 
 output "cidr" {

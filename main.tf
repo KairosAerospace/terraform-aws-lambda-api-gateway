@@ -83,7 +83,7 @@ module "lambda" {
 
   # database_uri  = "${module.rds_instance.url}"
 
-  subnet_ids         = [module.vpc_subnets.nat_subnet_id]
+  subnet_ids         = module.vpc_subnets.nat_subnet_ids
   security_group_ids = [aws_security_group.all.id]
 }
 

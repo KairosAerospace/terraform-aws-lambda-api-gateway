@@ -12,14 +12,14 @@ jobs:
       - checkout
       - run: kairos_container_init
       - run: 
-         name: validate terraform module
-         cmd: |
+          name: validate terraform module
+          command: |
             for submodule in modules/*; do
                echo "Validating ${submodule}"
                (cd $submodule; terraform validate)
       - run:
-         name: update tag
-         cmd: |
+          name: update tag
+          command: |
              git push -f origin master:release
         
 notify:

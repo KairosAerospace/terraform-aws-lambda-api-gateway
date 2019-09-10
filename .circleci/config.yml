@@ -17,7 +17,7 @@ jobs:
             terraform init
             for submodule in modules/*; do
                echo "Validating ${submodule}"
-               (cd $submodule; terraform validate)
+               terraform validate $submodule
             done
       - run:
           name: update tag

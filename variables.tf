@@ -73,6 +73,14 @@ variable "lambda_memory" {
   default     = "128"
 }
 
+variable "lambda_s3_bucket" {
+  description = "S3 bucket that holds lambda code"
+}
+
+variable "lambda_s3_key" {
+  description = "S3 key for lambda code"
+}
+
 ####################
 # API Gateway
 ####################

@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: 137296740171.dkr.ecr.us-west-2.amazonaws.com/kairos-docker-build:production
+      - image: 137296740171.dkr.ecr.us-west-2.amazonaws.com/kairos-docker-build:tf-0.12
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY

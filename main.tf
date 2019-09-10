@@ -87,21 +87,17 @@ module "lambda" {
   security_group_ids = [aws_security_group.all.id]
 }
 
-resource "aws_s3_bucket" "lambda_repo" {
-  bucket = "lambda-repo-${var.project}-${terraform.workspace}"
-  region = var.region
-}
 
 resource "aws_s3_bucket_object" "lambda_dist" {
-  bucket = aws_s3_bucket.lambda_repo.bucket
-  key    = var.lambda_zip_path
+  bucket = var.lambda_s3_bucket
+  key    = var.lambda_s3_key
   source = var.lambda_zip_path
   etag   = filemd5(var.lambda_zip_path)
 }
 
 data "aws_s3_bucket_object" "lambda_dist_hash" {
-  bucket     = aws_s3_bucket.lambda_repo.bucket
-  key        = var.lambda_zip_path
+  bucket     = var.lambda_s3_bucket
+  key        = var.lambda_s3_key
   depends_on = [aws_s3_bucket_object.lambda_dist]
 }
 

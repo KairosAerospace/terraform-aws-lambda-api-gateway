@@ -71,7 +71,7 @@ module "api" {
 ####################
 module "lambda" {
   source        = "./modules/lambda"
-  s3_bucket     = aws_s3_bucket.lambda_repo.bucket
+  s3_bucket     = var.lambda_s3_bucket
   s3_key        = var.lambda_zip_path
   hash          = data.aws_s3_bucket_object.lambda_dist_hash.etag
   function_name = "${var.project}-${terraform.workspace}-${var.lambda_function_name}"

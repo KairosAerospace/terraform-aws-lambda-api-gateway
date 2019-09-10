@@ -1,0 +1,33 @@
+
+version: 2
+jobs:
+  build:
+    docker:
+      - image: 137296740171.dkr.ecr.us-west-2.amazonaws.com/kairos-docker-build:production
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+    working_directory: /opt/kairos/build-home/repo
+    steps:
+      - checkout
+      - run: kairos_container_init
+      - run: 
+         name: validate terraform module
+         cmd: |
+            for submodule in modules/*; do
+               echo "Validating ${submodule}"
+               (cd $submodule; terraform validate)
+      - run:
+         name: update tag
+         cmd: |
+             git push -f origin master:release
+        
+notify:
+  webhooks:
+    - url: https://bdoa77w3h0.execute-api.us-west-2.amazonaws.com/webhook/
+workflows:
+  version: 2
+  kairos-workflow:
+    jobs:
+      - build:
+          context: org-global
